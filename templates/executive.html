@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Resume</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fff;
+            color: #111;
+            margin: 0;
+            padding: 0;
+        }
+        .page {
+            max-width: 700px;
+            margin: 32px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 40px 36px 32px 36px;
+        }
+        .header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            border-bottom: 1.5px solid #eee;
+            padding-bottom: 18px;
+            margin-bottom: 32px;
+        }
+        .main-info {
+            flex: 1;
+        }
+        .name {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 0 0 2px 0;
+            letter-spacing: 0.5px;
+        }
+        .headline {
+            font-size: 1.1em;
+            color: #555;
+            margin: 0 0 10px 0;
+            font-weight: 500;
+        }
+        .contact {
+            color: #222;
+            font-size: 1em;
+            margin-bottom: 8px;
+        }
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 32px;
+            border: 2px solid #eee;
+        }
+        .profiles {
+            display: flex;
+            gap: 14px;
+            margin-top: 6px;
+        }
+        .profile-link {
+            color: #1976d2;
+            font-weight: 500;
+            text-decoration: underline;
+            display: flex;
+            align-items: center;
+            font-size: 1em;
+        }
+        .profile-link svg {
+            width: 18px;
+            height: 18px;
+            margin-right: 4px;
+            fill: #1976d2;
+        }
+        .section {
+            margin-bottom: 32px;
+        }
+        .section-title {
+            color: #ff9800;
+            font-size: 1.15em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        hr {
+            border: none;
+            border-top: 1.5px solid #eee;
+            margin: 24px 0 24px 0;
+        }
+        ul, ol {
+            margin: 0;
+            padding-left: 22px;
+        }
+        li {
+            margin-bottom: 7px;
+        }
+        .orange-bullet {
+            color: #ff9800;
+            font-size: 1.1em;
+            margin-right: 7px;
+        }
+        a {
+            color: #1976d2;
+            text-decoration: underline;
+        }
+        .item-title {
+            font-weight: bold;
+            margin-bottom: 2px;
+            font-size: 1.08em;
+        }
+        .item-meta {
+            color: #666;
+            font-size: 0.98em;
+            margin-bottom: 4px;
+        }
+        .item-summary {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <div class="main-info">
+                <div class="name">{{ basics.name }}</div>
+                <div class="headline">{{ basics.headline }}</div>
+                <div class="contact">
+                    <span>{{ basics.email }}</span> | <span>{{ basics.phone }}</span> | <span>{{ basics.location }}</span>
+                    {% if basics.url.href %}| <a href="{{ basics.url.href }}" target="_blank">Website</a>{% endif %}
+                </div>
+                <div class="profiles">
+                {% for profile in sections.profiles["items"] %}
+                    <a class="profile-link" href="{{ profile.url.href }}" target="_blank">
+                        {% if profile.network == 'LinkedIn' %}
+                        <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.28c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm15.5 11.28h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.89v1.36h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v5.59z"/></svg>
+                        {% elif profile.network == 'GitHub' %}
+                        <svg viewBox="0 0 24 24"><path d="M12 .5c-6.6 0-12 5.4-12 12 0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1.7 1.7 2.7 1.2.1-.7.4-1.2.7-1.5-2.7-.3-5.5-1.3-5.5-5.7 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2.9-.2 1.8-.3 2.7-.3.9 0 1.8.1 2.7.3 2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.7.9 1.2 1.9 1.2 3.2 0 4.4-2.8 5.4-5.5 5.7.4.3.8 1 .8 2v3c0 .3.2.7.8.6 4.8-1.6 8.2-6.1 8.2-11.4 0-6.6-5.4-12-12-12z"/></svg>
+                        {% endif %}
+                        {{ profile.network }}
+                    </a>
+                {% endfor %}
+                </div>
+            </div>
+            {% if basics.picture.url %}
+            <img src="{{ basics.picture.url }}" class="avatar" alt="Profile Picture">
+            {% endif %}
+        </div>
+
+        {% if sections.summary.visible %}
+        <div class="section">
+            <div class="section-title">{{ sections.summary.name }}</div>
+            <div class="item-summary">{{ sections.summary.content | safe }}</div>
+        </div>
+        <hr>
+        {% endif %}
+
+        {% if sections.skills.visible %}
+        <div class="section">
+            <div class="section-title">{{ sections.skills.name }}</div>
+            <ul style="list-style: none; padding-left: 0;">
+            {% for skill in sections.skills["items"] %}
+                <li><span class="orange-bullet">&#9679;</span> <strong>{{ skill.name }}</strong>{% if skill.keywords is iterable and not skill.keywords is string %}: {{ skill.keywords | join(', ') }}{% endif %}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        <hr>
+        {% endif %}
+
+        {% if sections.experience.visible %}
+        <div class="section">
+            <div class="section-title">{{ sections.experience.name }}</div>
+            {% for job in sections.experience["items"] %}
+            <div class="item-title">{{ job.position }} - {{ job.company }}</div>
+            <div class="item-meta">{{ job.location }} | {{ job.date }}</div>
+            <div class="item-summary">{{ job.summary | safe }}</div>
+            {% endfor %}
+        </div>
+        <hr>
+        {% endif %}
+
+        {% if sections.education.visible %}
+        <div class="section">
+            <div class="section-title">{{ sections.education.name }}</div>
+            {% for edu in sections.education["items"] %}
+            <div class="item-title">{{ edu.studyType }} - {{ edu.institution }}</div>
+            <div class="item-meta">{{ edu.area }} | {{ edu.date }}</div>
+            {% endfor %}
+        </div>
+        <hr>
+        {% endif %}
+
+        {% if sections.certifications.visible %}
+        <div class="section">
+            <div class="section-title">{{ sections.certifications.name }}</div>
+            <ul>
+            {% for cert in sections.certifications["items"] %}
+                <li><span class="orange-bullet">&#9679;</span><strong>{{ cert.name }}</strong> - {{ cert.issuer }} ({{ cert.date }})</li>
+            {% endfor %}
+            </ul>
+        </div>
+        <hr>
+        {% endif %}
+
+        
+    </div>
+</body>
+</html>
