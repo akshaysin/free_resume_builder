@@ -15,10 +15,17 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>{{ name }}</h1>
-        <div class="info">
-            <span>{{ email }}</span> | <span>{{ phone }}</span> | <span>{{ address }}</span>
+    <div class="container" style="position: relative;">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+            <div>
+                <h1>{{ name }}</h1>
+                <div class="info">
+                    <span>{{ email }}</span> | <span>{{ phone }}</span> | <span>{{ address }}</span>
+                </div>
+            </div>
+            {% if picture_url %}
+            <img src="{{ picture_url }}" alt="Profile Picture" style="width:100px; height:100px; object-fit:cover; border-radius:50%; border:2px solid #eee; margin-left:24px;">
+            {% endif %}
         </div>
         <div class="section">
             <h2>Summary</h2>
