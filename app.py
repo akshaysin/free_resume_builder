@@ -82,10 +82,10 @@ def main():
         skills_to_remove = []
         for idx, skill in enumerate(st.session_state['skills_exec']):
             with st.expander(f'Skill #{idx+1}', expanded=True):
-                skill['name'] = st.text_input('Skill Name', value=skill['name'], key=f'skill_name_{idx}')
-                keywords_str = st.text_area('Keywords (comma separated)', value=','.join(skill['keywords']), key=f'skill_keywords_{idx}')
+                skill['name'] = st.text_input('Skill Name', value=skill['name'], key=f'skill_name_{template_name}_{idx}')
+                keywords_str = st.text_area('Keywords (comma separated)', value=','.join(skill['keywords']), key=f'skill_keywords_{template_name}_{idx}')
                 skill['keywords'] = [k.strip() for k in keywords_str.split(',') if k.strip()]
-                if st.button('Remove Skill', key=f'remove_skill_{idx}'):
+                if st.button('Remove Skill', key=f'remove_skill_{template_name}_{idx}'):
                     skills_to_remove.append(idx)
         for idx in reversed(skills_to_remove):
             st.session_state['skills_exec'].pop(idx)
@@ -156,23 +156,6 @@ def main():
     for idx in reversed(certs_to_remove):
         st.session_state['certifications'].pop(idx)
 
-    # --- Skills in Main Form ---
-    if template_name == 'executive.html':
-        st.header('Skills (Executive)')
-        if 'skills_exec' not in st.session_state:
-            st.session_state['skills_exec'] = []
-        if st.button('Add Skill', key='add_skill'):
-            st.session_state['skills_exec'].append({'name': '', 'keywords': []})
-        skills_to_remove = []
-        for idx, skill in enumerate(st.session_state['skills_exec']):
-            with st.expander(f'Skill #{idx+1}', expanded=True):
-                skill['name'] = st.text_input('Skill Name', value=skill['name'], key=f'skill_name_{idx}')
-                keywords_str = st.text_area('Keywords (comma separated)', value=','.join(skill['keywords']), key=f'skill_keywords_{idx}')
-                skill['keywords'] = [k.strip() for k in keywords_str.split(',') if k.strip()]
-                if st.button('Remove Skill', key=f'remove_skill_{idx}'):
-                    skills_to_remove.append(idx)
-        for idx in reversed(skills_to_remove):
-            st.session_state['skills_exec'].pop(idx)
 
     # --- Context Construction ---
     if template_name == 'executive.html':
